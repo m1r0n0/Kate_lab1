@@ -1,25 +1,28 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Kate_Lab1.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SP.Identity.DataAccessLayer.Models;
 
 namespace SP.Identity.DataAccessLayer.Data
 {
     public class ShopContext : DbContext
     {
-        public IdentityContext(DbContextOptions<IdentityContext> options)
+        public ShopContext(DbContextOptions<ShopContext> options)
             : base(options)
         {
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
         }
 
-        public new DbSet<User> Users { get; set; } = default!;
+        public new DbSet<Staff> Staff { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().Property(p => p.Id).HasColumnName("UserId");
+            modelBuilder.Entity<Staff>().HasData(
+                new Staff { Id = 1, Name = "Bob", Position = "Manager" },
+                new Staff { Id = 2, Name = "Jack", Position = "Assistant" },
+                new Staff { Id = 3, Name = "Patrick", Position = "Assistant" }
+            );
         }
     }
 }
