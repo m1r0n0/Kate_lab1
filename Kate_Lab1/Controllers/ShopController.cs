@@ -1,3 +1,4 @@
+using Kate_Lab1.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using SP.Identity.DataAccessLayer.Data;
 
@@ -14,10 +15,16 @@ namespace Kate_Lab1.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public void Foo()
+        [HttpPost]
+        public void Foo(List<Staff> list)
         {
-            var r = _context.Staff.Any();
+            //List<Staff> list1 = new List<Staff> {
+            //    new Staff { Id = 1, Name = "Bob", Position = "Manager" },
+            //    new Staff { Id = 2, Name = "Jack", Position = "Assistant" },
+            //    new Staff { Id = 3, Name = "Patrick", Position = "Assistant" } 
+            //};
+            _context.Staff.AddRange(list);
+            _context.SaveChanges();
         }
     }
 }

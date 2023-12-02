@@ -7,8 +7,7 @@
         public string Description { get; set; }
         public string Status { get; set; }
         public DateTime CreateTime { get; set; }
-        public DateTime DeactivateTime { get; set; }
+        public DateTime? DeactivateTime { get; set; }
         public DateTime LastChange { get; set; }
-        public int LastChangeStaffId { get; set; }
     }
 }
